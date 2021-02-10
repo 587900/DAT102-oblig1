@@ -1,6 +1,9 @@
-package oving2;
+package no.hvl.dat102;
 
-import oving2.Film.Sjanger;
+import java.util.Arrays;
+
+import no.hvl.dat102.Film.Sjanger;
+import no.hvl.dat102.adt.FilmarkivADT;
 
 public class Filmarkiv implements FilmarkivADT {
 
@@ -43,14 +46,16 @@ public class Filmarkiv implements FilmarkivADT {
 		filmtabell[index] = filmtabell[antall];
 		filmtabell[antall] = null;
 	}
-
+	
 	@Override
 	public Film[] searchFilm(String delTittel) {
+		delTittel = delTittel.toUpperCase();
+		
 		Film[] filmMatches = new Film[antall];
 		int filmMatchesCount = 0;
 		
 		for (int i = 0; i < antall; i++) {
-			if (filmtabell[i].getTittel().matches(delTittel)) filmMatches[filmMatchesCount++] = filmtabell[i];
+			if (filmtabell[i].getTittel().toUpperCase().contains(delTittel)) filmMatches[filmMatchesCount++] = filmtabell[i];
 		}
 		
 		Film[] trimmed = new Film[filmMatchesCount];
@@ -61,11 +66,13 @@ public class Filmarkiv implements FilmarkivADT {
 
 	@Override
 	public Film[] searchProd(String delProd) {
+		delProd = delProd.toUpperCase();
+		
 		Film[] filmMatches = new Film[antall];
 		int filmMatchesCount = 0;
 		
 		for (int i = 0; i < antall; i++) {
-			if (filmtabell[i].getProdusent().matches(delProd)) filmMatches[filmMatchesCount++] = filmtabell[i];
+			if (filmtabell[i].getProdusent().toUpperCase().contains(delProd)) filmMatches[filmMatchesCount++] = filmtabell[i];
 		}
 		
 		Film[] trimmed = new Film[filmMatchesCount];

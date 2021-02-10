@@ -1,63 +1,74 @@
-package oving2;
+package no.hvl.dat102.klient;
 
+import java.util.Arrays;
 import java.util.Scanner;
+
+import no.hvl.dat102.Film;
+import no.hvl.dat102.Film.Sjanger;
+import no.hvl.dat102.adt.FilmarkivADT;
+
 import static java.lang.Integer.*;
 
-import oving2.Film.Sjanger;
-
 public class Tekstgrensesnitt {
-
-	//Vurder scanner wrapper
 	
-	public Film lesFilm() {
+	public Film lesFilm(Scanner scan, int filmNr) {
 
 		Film inputFilm = new Film();
-		Scanner scan = new Scanner(System.in);
 		String input;
 
-		while (true) {
-			System.out.println("Skriv filmnummer og trykk Enter:");
-			input = scan.next();
-			if (isNumeric(input)) {
-				inputFilm.setFilmNr(parseInt(input));
-				break;
-			}
-			System.out.println("Feil. PrÃ¸v igjen.");
-		}
+//		while (true) {
+//			System.out.println("Skriv filmnummer og trykk Enter:");
+//			input = scan.nextLine();
+//			if (isNumeric(input)) {
+//				inputFilm.setFilmNr(parseInt(input));
+//				break;
+//			}
+//			System.out.println("Feil. Prøv igjen.");
+//		}
+		inputFilm.setFilmNr(filmNr);	//for å unngå krasjar i id-systemet
 
 		System.out.println("Skriv tittel og trykk Enter:");
-		inputFilm.setProdusent(scan.next());
+		inputFilm.setTittel(scan.nextLine());
 
 		System.out.println("Skriv produsent og trykk Enter:");
-		inputFilm.setProdusent(scan.next());
+		inputFilm.setProdusent(scan.nextLine());
 		
 		while (true) {
-			System.out.println("Skriv utgivelsesÃ¥r og trykk Enter:");
-			input = scan.next();
+			System.out.println("Skriv utgivelsesår og trykk Enter:");
+			input = scan.nextLine();
 			if (isNumeric(input)) {
 				inputFilm.setYear(parseInt(input));
 				break;
 			}
-			System.out.println("Feil. PrÃ¸v igjen.");
+			System.out.println("Feil. Prøv igjen.");
 		}
 
 		while (true) {
 			System.out.println("Skriv sjanger og trykk Enter:");
+			System.out.println("Du kan velge mellom: " + stringifyArr(Sjanger.values()));
+			input = scan.nextLine().toUpperCase();
 			try {
 				inputFilm.setSjanger(Sjanger.valueOf(input));
 				break;
 			} catch (Exception e) {
-				System.out.println("Feil. PrÃ¸v igjen.");
+				System.out.println("Feil. Prøv igjen.");
 			}
 
 		}
 
 		System.out.println("Skriv filmselskap og trykk Enter:");
-		inputFilm.setFilmSelskap(scan.next());
-
-		scan.close();
+		inputFilm.setFilmSelskap(scan.nextLine());
 
 		return inputFilm;
+	}
+	
+	//Veit ikkje om Arrays.toString(...) er lov, så vi lagde vår egen.
+	private <T> String stringifyArr(T[] arr) {
+		String s = "";
+		for (T t : arr) s += ", " + t;
+		
+		s = s.substring(Math.min(s.length(), 2));
+		return "[" + s + "]";
 	}
 
 	private boolean isNumeric(String tallTxt) {
@@ -72,15 +83,13 @@ public class Tekstgrensesnitt {
 	}
 
 	public void visFilm(Film film) {
-			System.out.println(film.toString());
+			System.out.println(film.toString() + "\n");
 	}
 	
 	public void printByTitle(FilmarkivADT arkiv, String sokTitle) {
-
 		for (Film film : arkiv.searchFilm(sokTitle)) {
 			visFilm(film);
 		}
-
 	}
 
 	public void printByProd(FilmarkivADT arkiv, String sokProd) {

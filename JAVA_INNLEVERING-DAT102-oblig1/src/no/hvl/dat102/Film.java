@@ -1,4 +1,6 @@
-package oving2;
+package no.hvl.dat102;
+
+import java.util.Arrays;
 
 public class Film {
 	
@@ -82,7 +84,7 @@ public class Film {
 	@Override
 	public String toString () {
 		return "Filmnummer: " + getFilmNr() + "\nTittel: " + getTittel() + "\nProdusent: " + getProdusent()
-			   + "\nUtgivelsesår: " + getYear() + "\nSjanger: " + getSjanger()
+			   + "\nUtgivelses�r: " + getYear() + "\nSjanger: " + getSjanger()
 			   + "\nFilmselskap: " + getFilmSelskap();
 	}
 	
@@ -99,7 +101,7 @@ public class Film {
 //		return filmNr + separator + fTittel + separator + fProdusent + separator + år + separator + fSjanger
 //			   + separator + fFilmSelskap;
 		
-		String separator = "\u2654";
+		String separator = "#";
 		
 		return filmNr + separator + tittel + separator + produsent + separator + year + separator + sjanger
 				   + separator + filmSelskap;
@@ -107,8 +109,7 @@ public class Film {
 	
 	public static Film deserialize (String data) {
 		
-		String[] info = data.split("\u2654");
-		
+		String[] info = data.split("#");
 		return new Film (Integer.parseInt(info[0]), info[1], info[2],
 				Integer.parseInt(info[3]), Sjanger.valueOf(info[4]), info[5]);
 	}
