@@ -8,7 +8,7 @@ public class Filmarkiv implements FilmarkivADT {
 	private int antall;
 
 	public Filmarkiv(int antall) {
-		this.antall = antall;
+		this.antall = 0;
 		filmtabell = new Film[antall];
 	}
 
@@ -114,7 +114,7 @@ public class Filmarkiv implements FilmarkivADT {
 	}
 	
 	public int indexOf(Film film) {
-		for(int i = 0; i < filmtabell.length; i++) {
+		for(int i = 0; i < antall; i++) {
 			if (filmtabell[i].equals(film)) return i;
 		}
 		return -1;

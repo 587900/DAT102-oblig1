@@ -39,6 +39,7 @@ public class Fil {
 			for(int i = 0; i < antall; i++) {
 				arkiv.addFilm(Film.deserialize(reader.readLine()));
 			}
+			return arkiv;
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -46,12 +47,22 @@ public class Fil {
 		
 		return null; }
 	
-	public static void main(String[] args) {
-		Filmarkiv arkiv = new Filmarkiv(2);
-		arkiv.addFilm(new Film(0, "Harry", "Potter", 1200, Sjanger.ACTION, "Berg Productions"));
-		arkiv.addFilm(new Film(3, "Film2", "Se det, ja", 1349, Sjanger.KOMEDIE, "Birkeland Productions"));
-		writeFile(arkiv); //ERROR
+	public static String[] listFiles(String directory) {
+		
 	}
+	
+//	public static void main(String[] args) {
+//		Filmarkiv arkiv = new Filmarkiv(2);
+//		arkiv.addFilm(new Film(0, "Harry", "Potter", 1200, Sjanger.ACTION, "Berg Productions"));
+//		arkiv.addFilm(new Film(3, "Film2", "Se det, ja", 1349, Sjanger.KOMEDIE, "Birkeland Productions"));
+//		writeFile(arkiv); //ERROR
+//		
+//		Filmarkiv arkiv2 = readFile();
+//		Tekstgrensesnitt tg = new Tekstgrensesnitt();
+//		tg.printStats(arkiv2);
+//		for (Film film : arkiv2.getFilmCollection()) System.out.println(film);
+//		
+//	}
 
 	
 }
