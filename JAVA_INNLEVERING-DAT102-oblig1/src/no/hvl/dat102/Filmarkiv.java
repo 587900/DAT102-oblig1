@@ -31,7 +31,7 @@ public class Filmarkiv implements FilmarkivADT {
 	
 	@Override
 	public void addFilm(Film film) {
-		if (indexOf(film) >= 0) return; //Filmen finnes
+		if (indexOf(film) >= 0) return; //Filmen finnes (vurdér tillatelse av duplikater. Filmarkiv2 tillater det.).
 	
 		if (isFull()) expandBy(1);
 		filmtabell[antall] = film;
@@ -88,6 +88,7 @@ public class Filmarkiv implements FilmarkivADT {
 		return antall;
 	}
 	
+	@Override
 	public int countByGenre (Sjanger sjanger) {
 		
 		int antMatch = 0;
