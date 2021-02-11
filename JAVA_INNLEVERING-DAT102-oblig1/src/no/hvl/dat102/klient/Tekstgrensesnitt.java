@@ -1,6 +1,5 @@
 package no.hvl.dat102.klient;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import no.hvl.dat102.Film;
@@ -23,9 +22,9 @@ public class Tekstgrensesnitt {
 //				inputFilm.setFilmNr(parseInt(input));
 //				break;
 //			}
-//			System.out.println("Feil. Prøv igjen.");
+//			System.out.println("Feil. Prï¿½v igjen.");
 //		}
-		inputFilm.setFilmNr(filmNr);	//for å unngå krasjar i id-systemet
+		inputFilm.setFilmNr(filmNr);	//for ï¿½ unngï¿½ krasjar i id-systemet
 
 		System.out.println("Skriv tittel og trykk Enter:");
 		inputFilm.setTittel(scan.nextLine());
@@ -34,13 +33,13 @@ public class Tekstgrensesnitt {
 		inputFilm.setProdusent(scan.nextLine());
 		
 		while (true) {
-			System.out.println("Skriv utgivelsesår og trykk Enter:");
+			System.out.println("Skriv utgivelsesï¿½r og trykk Enter:");
 			input = scan.nextLine();
 			if (isNumeric(input)) {
 				inputFilm.setYear(parseInt(input));
 				break;
 			}
-			System.out.println("Feil. Prøv igjen.");
+			System.out.println("Feil. Prï¿½v igjen.");
 		}
 
 		while (true) {
@@ -51,7 +50,7 @@ public class Tekstgrensesnitt {
 				inputFilm.setSjanger(Sjanger.valueOf(input));
 				break;
 			} catch (Exception e) {
-				System.out.println("Feil. Prøv igjen.");
+				System.out.println("Feil. Prï¿½v igjen.");
 			}
 
 		}
@@ -62,7 +61,7 @@ public class Tekstgrensesnitt {
 		return inputFilm;
 	}
 	
-	//Veit ikkje om Arrays.toString(...) er lov, så vi lagde vår egen.
+	//Veit ikkje om Arrays.toString(...) er lov, sï¿½ vi lagde vï¿½r egen.
 	private <T> String stringifyArr(T[] arr) {
 		String s = "";
 		for (T t : arr) s += ", " + t;

@@ -20,6 +20,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 		LinearNode<Film> current = start;
 		while (current != null) {
 			collection[index++] = current.getElement();
+			current = current.getNext();
 		}
 		
 		return collection;
@@ -50,6 +51,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 				current.setNext(next.getNext());
 				return;
 			}
+			current = next;
 		}	
 	}
 
@@ -63,6 +65,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			if (film.getTittel().toUpperCase().contains(title)) {
 				count++;
 			}
+			current = current.getNext();
 		}
 		Film[] ret = new Film[count];
 		int index = 0;
@@ -71,6 +74,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			if (film.getTittel().toUpperCase().contains(title)) {
 				ret[index++] = film;
 			}
+			current = current.getNext();
 		}
 		return ret;
 	}
@@ -85,6 +89,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			if (film.getProdusent().toUpperCase().contains(prod)) {
 				count++;
 			}
+			current = current.getNext();
 		}
 		Film[] ret = new Film[count];
 		int index = 0;
@@ -93,6 +98,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			if (film.getProdusent().toUpperCase().contains(prod)) {
 				ret[index++] = film;
 			}
+			current = current.getNext();
 		}
 		return ret;
 	}
@@ -111,6 +117,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			if (current.getElement().getSjanger() == sjanger) {
 				count++;
 			}
+			current = current.getNext();
 		}
 		return count;
 	}

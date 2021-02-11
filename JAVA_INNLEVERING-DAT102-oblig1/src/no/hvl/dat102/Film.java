@@ -1,7 +1,5 @@
 package no.hvl.dat102;
 
-import java.util.Arrays;
-
 public class Film {
 	
 	private int filmNr;
@@ -84,7 +82,7 @@ public class Film {
 	@Override
 	public String toString () {
 		return "Filmnummer: " + getFilmNr() + "\nTittel: " + getTittel() + "\nProdusent: " + getProdusent()
-			   + "\nUtgivelsesår: " + getYear() + "\nSjanger: " + getSjanger()
+			   + "\nUtgivelsesï¿½r: " + getYear() + "\nSjanger: " + getSjanger()
 			   + "\nFilmselskap: " + getFilmSelskap();
 	}
 	

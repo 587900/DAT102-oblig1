@@ -1,7 +1,5 @@
 package no.hvl.dat102;
 
-import java.util.Arrays;
-
 import no.hvl.dat102.Film.Sjanger;
 import no.hvl.dat102.adt.FilmarkivADT;
 
