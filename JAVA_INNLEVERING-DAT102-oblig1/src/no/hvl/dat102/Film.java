@@ -10,9 +10,11 @@ public class Film {
 	private Sjanger sjanger;
 	private String filmSelskap;
 	
-	public Film () {
-		
-	}
+	private static final String SEPARATOR = "# #";
+//	private static final String REPLACEMENT = SEPARATOR + SEPARATOR;	//vurderte regex-løysing for å escape i tilfelle tittel inneheld SEPARATOR-teikn, men det blei litt for overkill
+//	private static final String REGEX_DESERIALIZE_SPLIT = "/(?<!" + SEPARATOR + ")" + SEPARATOR + "(?!" + SEPARATOR + ")/";
+	
+	public Film () {}
 	
 	public Film (int filmNr, String tittel, String produsent, int year, Sjanger sjanger, String filmSelskap) {
 		this.filmNr = filmNr;
@@ -82,32 +84,33 @@ public class Film {
 	@Override
 	public String toString () {
 		return "Filmnummer: " + getFilmNr() + "\nTittel: " + getTittel() + "\nProdusent: " + getProdusent()
-			   + "\nUtgivelsesï¿½r: " + getYear() + "\nSjanger: " + getSjanger()
+			   + "\nUtgivelsesår: " + getYear() + "\nSjanger: " + getSjanger()
 			   + "\nFilmselskap: " + getFilmSelskap();
 	}
 	
 	public String serialize () {
 		
-//		String separator = "#";
-//		String replacement = "\\" + separator;
+//		String fTittel = tittel.replace(SEPARATOR, REPLACEMENT);
+//		String fProdusent = produsent.replace(SEPARATOR, REPLACEMENT);
+//		String fSjanger = sjanger.toString().replace(SEPARATOR, REPLACEMENT);
+//		String fFilmSelskap = filmSelskap.replace(SEPARATOR, REPLACEMENT);
+//		
+//		return filmNr + SEPARATOR + fTittel + SEPARATOR + fProdusent + SEPARATOR + year + SEPARATOR + fSjanger
+//			   + SEPARATOR + fFilmSelskap;
 		
-//		String fTittel = tittel.replace(separator, replacement);
-//		String fProdusent = produsent.replace(separator, replacement);
-//		String fSjanger = sjanger.toString().replace(separator, replacement);
-//		String fFilmSelskap = filmSelskap.replace(separator, replacement);
-		
-//		return filmNr + separator + fTittel + separator + fProdusent + separator + Ã¥r + separator + fSjanger
-//			   + separator + fFilmSelskap;
-		
-		String separator = "#";
-		
-		return filmNr + separator + tittel + separator + produsent + separator + year + separator + sjanger
-				   + separator + filmSelskap;
+		return filmNr + SEPARATOR + tittel + SEPARATOR + produsent + SEPARATOR + year + SEPARATOR + sjanger
+				   + SEPARATOR + filmSelskap;
 	}
 	
 	public static Film deserialize (String data) {
 		
-		String[] info = data.split("#");
+//		String[] info = data.split(REGEX_DESERIALIZE_SPLIT);
+//		for (int i = 0; i < info.length; ++i) info[i] = info[i].replace(REPLACEMENT, SEPARATOR);
+//		
+//		return new Film (Integer.parseInt(info[0]), info[1], info[2],
+//				Integer.parseInt(info[3]), Sjanger.valueOf(info[4]), info[5]);
+//		
+		String[] info = data.split(SEPARATOR);
 		return new Film (Integer.parseInt(info[0]), info[1], info[2],
 				Integer.parseInt(info[3]), Sjanger.valueOf(info[4]), info[5]);
 	}

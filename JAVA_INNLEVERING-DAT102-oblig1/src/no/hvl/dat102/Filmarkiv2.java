@@ -16,10 +16,9 @@ public class Filmarkiv2 implements FilmarkivADT {
 	public Film[] getFilmCollection() {
 		
 		Film[] collection = new Film[antall];
-		int index = 0;
 		LinearNode<Film> current = start;
-		while (current != null) {
-			collection[index++] = current.getElement();
+		for (int i = 0; i < antall; ++i) {
+			collection[i] = current.getElement();
 			current = current.getNext();
 		}
 		
@@ -28,6 +27,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 
 	@Override
 	public void addFilm(Film film) {
+		antall++;
 		if (start == null) {
 			start = new LinearNode<Film>(film);
 			return;
@@ -35,20 +35,22 @@ public class Filmarkiv2 implements FilmarkivADT {
 		LinearNode<Film> current = start;
 		while (current.getNext() != null) current = current.getNext();
 		current.setNext(new LinearNode<Film>(film));
-		antall++;
 	}
 
 	@Override
-	public void deleteFilm(Film film) {
-		if (start.getElement().equals(film)) {
+	public void deleteFilm(int filmnr) {
+		if (antall == 0) return;
+		if (start.getElement().getFilmNr() == filmnr) {
 			start = start.getNext();
+			antall--;
 			return;
 		}
 		LinearNode<Film> current = start;
 		while (current.getNext() != null) {
 			LinearNode<Film> next = current.getNext();
-			if (next.getElement().equals(film)) {
+			if (next.getElement().getFilmNr() == filmnr) {
 				current.setNext(next.getNext());
+				antall--;
 				return;
 			}
 			current = next;
@@ -68,6 +70,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			current = current.getNext();
 		}
 		Film[] ret = new Film[count];
+		current = start;
 		int index = 0;
 		while (current != null) {
 			Film film = current.getElement();
@@ -92,6 +95,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 			current = current.getNext();
 		}
 		Film[] ret = new Film[count];
+		current = start;
 		int index = 0;
 		while (current != null) {
 			Film film = current.getElement();

@@ -29,16 +29,16 @@ public class Filmarkiv implements FilmarkivADT {
 	
 	@Override
 	public void addFilm(Film film) {
-		if (indexOf(film) >= 0) return; //Filmen finnes (vurdér tillatelse av duplikater. Filmarkiv2 tillater det.).
+		if (indexOf(film.getFilmNr()) >= 0) return; //Filmen finnes (vurder tillatelse av duplikater. Filmarkiv2 tillater det. Evt. forby det i Filmarkiv2).
 	
-		if (isFull()) expandBy(1);
+		if (isFull()) expandBy((int)Math.max(1, filmtabell.length * 0.1));
 		filmtabell[antall] = film;
 		antall++;
 	}
 
 	@Override
-	public void deleteFilm(Film film) {
-		int index = indexOf(film);
+	public void deleteFilm(int filmnr) {
+		int index = indexOf(filmnr);
 		if (index == -1) return;
 		antall--;
 		filmtabell[index] = filmtabell[antall];
@@ -119,9 +119,9 @@ public class Filmarkiv implements FilmarkivADT {
 		return (antall == filmtabell.length);
 	}
 	
-	public int indexOf(Film film) {
+	public int indexOf(int filmnr) {
 		for(int i = 0; i < antall; i++) {
-			if (filmtabell[i].equals(film)) return i;
+			if (filmtabell[i].getFilmNr() == filmnr) return i;
 		}
 		return -1;
 	}

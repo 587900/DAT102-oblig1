@@ -27,11 +27,12 @@ public interface FilmarkivADT {
 	public void addFilm(Film film);
 
 	/**
-	 * Sletter en film du Ã¸nsker Ã¥ fjerne fra filmarkivet.
+	 * Sletter en film du ønsker å fjerne fra filmarkivet.
+	 * Ved duplikat / flere ved samme filmnummer, slett første førekomst.
 	 * 
-	 * @param film - filmen du vil slette.
+	 * @param filmnr - filmnummeret til filmen du vil slette.
 	 */
-	public void deleteFilm(Film film);
+	public void deleteFilm(int filmnr);
 
 	/**
 	 * SÃ¸ker etter en film med gitt delstreng, og returnerer en tabell med filmer

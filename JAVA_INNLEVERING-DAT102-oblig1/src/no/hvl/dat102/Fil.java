@@ -5,17 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-
-import no.hvl.dat102.Film.Sjanger;
 import no.hvl.dat102.adt.FilmarkivADT;
 
 public class Fil {
 	
-	// String = String2.replace (input, output)
-	// String split regEx
-	
-	private static String LOCATION = "Filmarkiv.txt";
+	private static final String LOCATION = "Filmarkiv.txt";
 	
 	public static void writeFile (FilmarkivADT arkiv) { writeFile(arkiv, LOCATION); }
 	
@@ -38,7 +32,8 @@ public class Fil {
 		
 		try (BufferedReader reader = new BufferedReader(new FileReader (location))){
 			int antall = Integer.parseInt(reader.readLine());
-			Filmarkiv arkiv = new Filmarkiv(antall);
+			FilmarkivADT arkiv = new Filmarkiv(antall);
+			//FilmarkivADT arkiv = new Filmarkiv2();
 			for(int i = 0; i < antall; i++) {
 				arkiv.addFilm(Film.deserialize(reader.readLine()));
 			}
@@ -52,9 +47,20 @@ public class Fil {
 	
 	/**
 	 * Returns null if directory parameter does not denote a directory
+	 * Will filter based on file-extension
 	 * */
-	public static String[] listFiles(String directory) {
-		return new File(directory).list();
+	public static String[] listFiles(String directory) { return listFilesFiltered(directory, ""); }
+	public static String[] listFilesFiltered(String directory, String extension) {
+		return new File(directory).list((dir, name) -> name.toLowerCase().endsWith(extension));
+	}
+	
+	public static String listFilesPretty(String directory) { return listFilesFilteredPretty(directory, ""); }
+	public static String listFilesFilteredPretty(String directory, String extension) {
+		String[] files = listFilesFiltered(directory,extension);
+		String ret = "";
+		for (String f : files) ret += ", " + f;
+		ret = ret.substring(Math.min(ret.length(), 2));
+		return ret;
 	}
 	
 	public static boolean exists(String file) {
