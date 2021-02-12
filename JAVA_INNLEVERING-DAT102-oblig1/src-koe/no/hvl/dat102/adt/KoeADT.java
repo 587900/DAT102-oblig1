@@ -9,7 +9,7 @@ public interface KoeADT<T>{
 	 * Legge til et element bak i køen.
 	 * @param element er elementet som blir satt inn i køen
 	 */
-    void innKoe (T element) ;
+    void innKoe (T element);
 
    
     /**
@@ -26,7 +26,7 @@ public interface KoeADT<T>{
      * @return elementet foran i køen
      * @exception EmptyCollectionException unntak kastes hvis køen allerede er tom
      */
-    T foerste() ;
+    T foerste();
    
   
     /**

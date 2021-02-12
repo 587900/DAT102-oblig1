@@ -24,6 +24,7 @@ public class TabellKoe<T> implements KoeADT<T> {
 	/******************************************************************
 	 * Oppretter en tom kø med spesifisert kapasitet..
 	 ******************************************************************/
+	@SuppressWarnings("unchecked")
 	public TabellKoe(int startKapasitet) {
 		bak = 0;
 		koe = (T[]) (new Object[startKapasitet]);
@@ -104,6 +105,7 @@ public class TabellKoe<T> implements KoeADT<T> {
 	 * Oppretter en ny større tabell for å lagre elmenetene.
 	 ******************************************************************/
 	private void utvid() {
+		@SuppressWarnings("unchecked")
 		T[] hjelpetabell = (T[]) (new Object[koe.length * 2]);
 
 		for (int soek = 0; soek < koe.length; soek++) {
